@@ -1,15 +1,12 @@
 const {Router}=require('express');
-const messages=require("../data/message");
 const router=Router();
+const {getAllUsers}=require("../db/queries");
 
 
-
-router.get("/:messageId",(req,res)=>{
-    // console.log(messages);
+router.get("/:messageId",async(req,res)=>{
    const messageId=req.params.messageId;
-//    console.log(messageId);
-   const selectedMessage= messages.find((message)=> message.id==messageId);
-//    console.log(selectedMessage);
+   const allMessages= await getAllUsers();
+   const selectedMessage= allMessages.find((message)=> message.id==messageId);
     res.render("detail",{message:selectedMessage});
 })
 

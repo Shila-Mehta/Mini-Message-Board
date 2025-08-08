@@ -1,9 +1,10 @@
 
  const {Router}=require('express');
- const messages=require("../data/message");
+ const {getAllUsers}=require("../db/queries");
   const router=Router();
 
-router.get("/",(req,res)=>{
+router.get("/",async(req,res)=>{
+   const messages=  await getAllUsers();
     res.render('index',{title:"Mini MessageBoard",messages:messages})
 })
 
